@@ -31,7 +31,7 @@ export default {
   methods: {
     update() {
       const waiting = Swal.fire({
-        title: 'Aguarde!',
+        title: 'Carregando...',
         type: 'info',
         allowOutsideClick: false,
         showConfirmButton: false
