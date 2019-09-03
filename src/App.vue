@@ -1,14 +1,13 @@
 <template>
   <div>
-    <div v-if="!showApp && !showLogin" class="d-flex justify-content-center mb-3">
-      <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner>
-    </div>
     <application-layout v-show="showApp"/>
     <authentication-layout v-show="showLogin" v-on:update-layout="update"/>
   </div>
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+
 import MeService from 'services/me'
 
 import ApplicationLayout from 'components/layouts/Application.vue'
@@ -31,6 +30,12 @@ export default {
   },
   methods: {
     update() {
+      const waiting = Swal.fire({
+        title: 'Aguarde!',
+        type: 'info',
+        allowOutsideClick: false,
+        showConfirmButton: false
+      })
       MeService.index()
         .then(response => {
           this.showApp = true
@@ -41,7 +46,7 @@ export default {
             this.showApp = false
             this.showLogin = true
           }
-        })
+        }).finally(() => { waiting.close() })
     }
   }
 }
