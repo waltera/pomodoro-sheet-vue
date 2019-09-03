@@ -28,7 +28,11 @@
       </label>
     </div>
 
-    <b-button type="submit" variant="primary">Sign in</b-button>
+    <b-button v-if="submit.enabled" type="submit" variant="primary">{{submit.text}}</b-button>
+    <b-button v-else="submit.enabled" variant="primary" disabled>
+      <b-spinner small type="grow"></b-spinner>
+      {{submit.text}}
+    </b-button>
   </b-form>
 </template>
 
@@ -86,6 +90,10 @@ export default {
   data() {
     return {
       error: '',
+      submit: {
+        enabled: true,
+        text: 'Sign in'
+      },
       user: {
         email: '',
         password: ''
@@ -94,11 +102,16 @@ export default {
   },
   methods: {
     onSubmit() {
+      this.submit.text = 'Sign in...'
+      this.submit.enabled = false
       TokenService.createPassword(this.user).then(response => {
           localStorage.setItem('token', response.data.access_token)
           this.$emit('update-layout')
         }).catch(error => {
           this.error = 'Informações inválidas'
+        }).finally(() => {
+          this.submit.text = 'Sign in'
+          this.submit.enabled = true
         })
     }
   }
