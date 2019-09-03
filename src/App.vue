@@ -1,29 +1,48 @@
 <template>
-  <div id="app">
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-      <h5 class="my-0 mr-md-auto font-weight-normal">
-        <a href="/">Company name</a>
-      </h5>
-      <nav class="my-2 my-md-0 mr-md-3">
-        <a href="/tasks">Tasks</a>
-
-        <a class="p-2 text-dark" href="#">Configurações</a>
-      </nav>
-      <a class="btn btn-outline-primary" href="#">Sign up</a>
+  <div>
+    <div v-if="!showApp && !showLogin" class="d-flex justify-content-center mb-3">
+      <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner>
     </div>
-    <div class="container">
-      <router-view></router-view>
-    </div>
+    <application-layout v-show="showApp"/>
+    <authentication-layout v-show="showLogin" v-on:update-layout="update"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MeService from 'services/me'
+
+import ApplicationLayout from 'components/layouts/Application.vue'
+import AuthenticationLayout from 'components/layouts/Authentication.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    'application-layout': ApplicationLayout,
+    'authentication-layout': AuthenticationLayout
+  },
+  data() {
+    return {
+      showApp: false,
+      showLogin: false
+    }
+  },
+  mounted() {
+    this.update()
+  },
+  methods: {
+    update() {
+      MeService.index()
+        .then(response => {
+          this.showApp = true
+          this.showLogin = false
+        })
+        .catch(error => {
+          if(error.response.status == 401) {
+            this.showApp = false
+            this.showLogin = true
+          }
+        })
+    }
   }
 }
 </script>

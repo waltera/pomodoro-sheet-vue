@@ -1,5 +1,5 @@
-import HelloWorld from './components/HelloWorld.vue'
+import HomeIndex from './components/home/Index.vue'
 
 export default [
-  { path: '/', component: HelloWorld }
+  { path: '/', component: HomeIndex }
 ]
