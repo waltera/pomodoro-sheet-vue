@@ -37,7 +37,7 @@ export default {
         showConfirmButton: false
       })
       MeService.index()
-        .then(response => {
+        .then(() => {
           this.showApp = true
           this.showLogin = false
         })

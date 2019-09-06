@@ -29,7 +29,7 @@
     </div>
 
     <b-button v-if="submit.enabled" type="submit" variant="primary">{{submit.text}}</b-button>
-    <b-button v-else="submit.enabled" variant="primary" disabled>
+    <b-button v-else variant="primary" disabled>
       <b-spinner small type="grow"></b-spinner>
       {{submit.text}}
     </b-button>
@@ -107,7 +107,7 @@ export default {
       TokenService.createPassword(this.user).then(response => {
           localStorage.setItem('token', response.data.access_token)
           this.$emit('update-layout')
-        }).catch(error => {
+        }).catch(() => {
           this.error = 'Informações inválidas'
         }).finally(() => {
           this.submit.text = 'Sign in'
