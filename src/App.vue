@@ -1,7 +1,7 @@
 <template>
   <div>
-    <application-layout v-show="showApp"/>
-    <authentication-layout v-show="showLogin" v-on:update-layout="update"/>
+    <application-layout v-if="showApp"/>
+    <authentication-layout v-if="showLogin" v-on:update-layout="update"/>
   </div>
 </template>
 

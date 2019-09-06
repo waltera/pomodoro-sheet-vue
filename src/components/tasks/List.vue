@@ -4,7 +4,7 @@
       <div class="card-header d-flex justify-content-between align-items-center">
         <h5>Crie uma tarefa</h5>
         <span class="badge badge-pill">
-          <button type="button" class="btn btn-primary">Novo</button>
+          <router-link to="/tasks/new" class="btn btn-primary">Novo</router-link>
         </span>
       </div>
 
