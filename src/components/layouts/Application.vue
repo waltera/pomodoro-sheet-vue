@@ -2,12 +2,11 @@
   <div id="app">
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
       <h5 class="my-0 mr-md-auto font-weight-normal">
-        <a href="/">Company name</a>
+        <router-link to="/">Timer</router-link>
       </h5>
       <nav class="my-2 my-md-0 mr-md-3">
-        <a href="/tasks">Tasks</a>
-
-        <a class="p-2 text-dark" href="#">Configurações</a>
+        <router-link to="/tasks">Tasks</router-link>
+        <router-link to="/settings" class="p-2 text-dark">Configurações</router-link>
       </nav>
     </div>
     <div class="container">
@@ -16,7 +15,7 @@
   </div>
 </template>
 
-<style scoped>
+<style>
 html {
   font-size: 14px;
 }

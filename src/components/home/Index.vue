@@ -1,23 +1,29 @@
 <template>
   <div>
-    <timer></timer>
-    <div className="row">
-      <div className="col-sm-9">
-
+    <home-timer></home-timer>
+    <div class="row">
+      <div class="col-9">
+        <task-list></task-list>
       </div>
-      <div className="col-sm-3">
-
+      <div class="col-3">
+        <home-status></home-status>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Timer from './Timer.vue'
+import TaskFilters from 'components/tasks/Filters'
+import TaskList from 'components/tasks/List'
+import HomeTimer from './Timer.vue'
+import HomeStatus from './Status.vue'
 
 export default {
   components: {
-    'timer': Timer
+    'task-filters': TaskFilters,
+    'task-list': TaskList,
+    'home-timer': HomeTimer,
+    'home-status': HomeStatus
   }
 }
 </script>
